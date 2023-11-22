@@ -2,7 +2,9 @@ project:
   name: start
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: root
-    url: jdbc:mysql://localhost:3306/test
-    username: root
+    driver-class-name: org.postgresql.Driver
+    password: mybbs
+    url: jdbc:postgresql://10.199.97.142:5432/mybbs
+    username: mybbs
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
