@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.alan2lin.bbs.customer.CustomerMapper">
+<mapper namespace="com.alan2lin.bbs.mapper.CustomerMapper">
 
     <select id="getByXXX" resultType="com.alan2lin.bbs.customer.CustomerDO" resultMap="customerMap">
         select * from customer where customer_id = #{id}
@@ -12,4 +12,21 @@
         <result property="memberId" column="member_id"/>
         <result property="globalId" column="global_id"/>
     </resultMap>
+
+    <select id="queryUserPage" resultType="com.alan2lin.bbs.customer.CustomerDO">
+        SELECT
+        tb1.id userId,
+        tb1.user_name userName,
+        tb1.email,
+        tb1.phone,
+        tb1.create_time createTime,
+        tb1.update_time updateTime,
+        tb1.state,
+        tb2.school,
+        tb2.city_name cityName
+        FROM tb_user tb1
+        LEFT JOIN tb_user_extd tb2 ON tb1.id = tb2.user_id
+        WHERE tb1.state='1'
+        ORDER BY tb1.id DESC
+    </select>
 </mapper>

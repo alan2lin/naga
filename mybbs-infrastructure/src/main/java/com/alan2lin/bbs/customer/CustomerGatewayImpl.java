@@ -3,6 +3,7 @@ package com.alan2lin.bbs.customer;
 import com.alan2lin.bbs.domain.customer.Customer;
 import com.alan2lin.bbs.domain.customer.gateway.CustomerGateway;
 
+import com.alan2lin.bbs.mapper.CustomerMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
