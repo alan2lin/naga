@@ -1,6 +1,7 @@
 package com.alan2lin.bbs.app;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 public class CustomerValidatorTest {
 

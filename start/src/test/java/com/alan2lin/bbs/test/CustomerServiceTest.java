@@ -5,20 +5,24 @@ import com.alan2lin.bbs.api.CustomerServiceI;
 import com.alan2lin.bbs.dto.CustomerAddCmd;
 import com.alan2lin.bbs.dto.data.CustomerDTO;
 import com.alan2lin.bbs.dto.data.ErrorCode;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 
 /**
  * This is for integration test.
  *
  * Created by fulan.zjf on 2017/11/29.
  */
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class CustomerServiceTest {
 
@@ -26,7 +30,7 @@ public class CustomerServiceTest {
     private CustomerServiceI customerService;
 
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
     }
@@ -43,7 +47,7 @@ public class CustomerServiceTest {
         Response response = customerService.addCustomer(customerAddCmd);
 
         //3.assert
-        Assert.assertTrue(response.isSuccess());
+        Assertions.assertTrue(response.isSuccess());
     }
 
     @Test
@@ -58,6 +62,6 @@ public class CustomerServiceTest {
         Response response = customerService.addCustomer(customerAddCmd);
 
         //3.assert error
-        Assert.assertEquals(ErrorCode.B_CUSTOMER_companyNameConflict.getErrCode(), response.getErrCode());
+        Assertions.assertEquals(ErrorCode.B_CUSTOMER_companyNameConflict.getErrCode(), response.getErrCode());
     }
 }
