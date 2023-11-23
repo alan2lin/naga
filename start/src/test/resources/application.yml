@@ -9,7 +9,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       # 数据库
-      url: jdbc:postgresql://10.199.97.142:5432/mybbs
+      url: jdbc:tc:postgresql:16.1:///integration-tests-db
       username: mybbs
       password: mybbs
       driver-class-name: org.postgresql.Driver
@@ -26,6 +26,9 @@ spring:
       # 最小空闲时间
       min-evictable-idle-time-millis: 300000
 
+  jpa:
+    hibernate:
+      ddl-auto: create
 # 具体属性参见
 # https://mybatis.org/mybatis-3/zh/configuration.html
 # https://baomidou.com/pages/56bac0/#mapperlocations
