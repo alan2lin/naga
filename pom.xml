@@ -97,12 +97,6 @@
                 <artifactId>mybbs-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>com.alan2lin</groupId>-->
-<!--                <artifactId>mybbs-common</artifactId>-->
-<!--                <classifier>tests</classifier>-->
-<!--                <version>${project.version}</version>-->
-<!--            </dependency>-->
             <dependency>
                 <groupId>com.alan2lin</groupId>
                 <artifactId>mybbs-adapter</artifactId>
@@ -221,8 +215,7 @@
                 <scope>test</scope>
             </dependency>
 
-
-            <!--            &lt;!&ndash; https://mvnrepository.com/artifact/org.flywaydb/flyway-core &ndash;&gt;-->
+<!--            &lt;!&ndash; https://mvnrepository.com/artifact/org.flywaydb/flyway-core &ndash;&gt;-->
 <!--            <dependency>-->
 <!--                <groupId>org.flywaydb</groupId>-->
 <!--                <artifactId>flyway-core</artifactId>-->
@@ -255,6 +248,11 @@
                      <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.4.1</version>
+                </plugin>
 
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
@@ -263,5 +261,26 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.0</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
