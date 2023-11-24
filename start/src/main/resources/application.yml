@@ -25,6 +25,13 @@ spring:
       test-while-idle: true
       # 最小空闲时间
       min-evictable-idle-time-millis: 300000
+  flyway:
+    url: jdbc:postgresql://10.199.97.142:5432/mybbs
+    schemas: public
+    user: "mybbs"
+    password: "mybbs"
+    baselineOnMigrate: true
+    baselineVersion: 0
 
 # 具体属性参见
 # https://mybatis.org/mybatis-3/zh/configuration.html
@@ -35,3 +42,4 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapperLocations: classpath*:mybatis/mapper/*mapper.xml
   mapUnderscoreToCamelCase: true
+
