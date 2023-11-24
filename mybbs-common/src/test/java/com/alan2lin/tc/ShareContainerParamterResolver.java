@@ -1,4 +1,4 @@
-package com.alan2lin.bbs.test.tc;
+package com.alan2lin.tc;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;

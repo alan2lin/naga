@@ -97,6 +97,12 @@
                 <artifactId>mybbs-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.alan2lin</groupId>-->
+<!--                <artifactId>mybbs-common</artifactId>-->
+<!--                <classifier>tests</classifier>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>com.alan2lin</groupId>
                 <artifactId>mybbs-adapter</artifactId>

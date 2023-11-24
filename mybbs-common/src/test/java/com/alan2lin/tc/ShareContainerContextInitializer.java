@@ -1,4 +1,4 @@
-package com.alan2lin.bbs.test.tc;
+package com.alan2lin.tc;
 
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
