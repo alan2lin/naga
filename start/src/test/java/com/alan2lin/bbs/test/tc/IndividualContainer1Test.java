@@ -1,44 +1,55 @@
-package com.alan2lin.bbs.customer;
+package com.alan2lin.bbs.test.tc;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
+
+/**
+ * This is for integration test.
+ *
+ * Created by fulan.zjf on 2017/11/29.
+ */
+//@RunWith(SpringRunner.class)
 
 @SpringBootTest
-@ExtendWith(SpringExtension.class)
-@Testcontainers
-@ContextConfiguration(initializers = {CustomerServiceImplTest.Initializer.class})
 @Slf4j
-class CustomerServiceImplTest {
-
+@ContextConfiguration(initializers = {IndividualContainer1Test.Initializer.class})
+public class IndividualContainer1Test {
 
     @Value("${spring.datasource.url}")
     String jdbcurl;
 
+
     @Container
     static PostgreSQLContainer<?> pgContainer = new PostgreSQLContainer<>(
             "postgres:16.1"
-    ).withDatabaseName("individual-tests-db")
+    ).withDatabaseName("individual-tests-db1")
             .withUsername("sa")
-            .withPassword("sa");;
-    @DynamicPropertySource
-    static void setProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.data.mongodb.uri", pgContainer::getJdbcUrl);
+            .withPassword("sa");
+    {
+        pgContainer.start();
     }
+
+    @Test
+    void test1() {
+        // Access the container directly through the parameter
+        log.info("Running test 1 pgcontain jdbcurl [{}]",pgContainer.getJdbcUrl());
+        log.info("Running test 1 config jdbcurl [{}]",jdbcurl);
+        Assertions.assertEquals(pgContainer.getJdbcUrl(),jdbcurl);
+    }
+
 
     static class Initializer
             implements ApplicationContextInitializer<ConfigurableApplicationContext> {
@@ -51,9 +62,6 @@ class CustomerServiceImplTest {
         }
     }
 
-    @Test
-    public  void mytest1(){
-        log.info(" mytest1 jdbc url [{}] ",jdbcurl);
-    }
+
 
 }
