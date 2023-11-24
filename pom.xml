@@ -23,12 +23,14 @@
     </properties>
 
     <modules>
+        <module>mybbs-common</module>
         <module>mybbs-client</module>
         <module>mybbs-adapter</module>
         <module>mybbs-app</module>
         <module>mybbs-domain</module>
         <module>mybbs-infrastructure</module>
         <module>start</module>
+
     </modules>
 
     <dependencies>
@@ -63,6 +65,11 @@
     <dependencyManagement>
         <dependencies>
             <!--Project modules-->
+            <dependency>
+                <groupId>com.alan2lin</groupId>
+                <artifactId>mybbs-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.alan2lin</groupId>
                 <artifactId>mybbs-adapter</artifactId>
