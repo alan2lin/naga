@@ -15,6 +15,10 @@
     <dependencies>
         <dependency>
             <groupId>com.alan2lin</groupId>
+            <artifactId>mybbs-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alan2lin</groupId>
             <artifactId>mybbs-domain</artifactId>
         </dependency>
 
