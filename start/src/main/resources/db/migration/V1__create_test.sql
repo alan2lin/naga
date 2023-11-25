@@ -1,3 +1,5 @@
+DROP SEQUENCE test_id_seq ;
+CREATE SEQUENCE test_id_seq START 3;
 CREATE TABLE "public"."test" (
   "id" int8 NOT NULL,
   "name" varchar(255) COLLATE "pg_catalog"."default",
@@ -5,6 +7,8 @@ CREATE TABLE "public"."test" (
   PRIMARY KEY ("id")
 )
 ;
+ALTER TABLE "public"."test" ALTER COLUMN "id" SET DEFAULT nextval('test_id_seq'::regclass);
+
 
 ALTER TABLE "public"."test"
   OWNER TO "mybbs";
