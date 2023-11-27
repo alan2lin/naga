@@ -2,29 +2,35 @@ project:
   name: start
 spring:
   datasource:
-#    driver-class-name: org.postgresql.Driver
-#    password: mybbs
-#    url: jdbc:postgresql://10.199.97.142:5432/mybbs
-#    username: mybbs
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      # 数据库
-      url: jdbc:postgresql://10.199.97.142:5432/mybbs
-      username: mybbs
-      password: mybbs
-      driver-class-name: org.postgresql.Driver
-      # 连接池-初始化大小
-      initial-size: 10
-      # 连接池-最大连接数
-      max-active: 100
-      # 最大等待时间
-      max-wait: 60000
-      # 连接池-最小空闲数
-      min-idle: 10
-      # 检测空闲连接
-      test-while-idle: true
-      # 最小空闲时间
-      min-evictable-idle-time-millis: 300000
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:shardingjdbc.yml
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+#
+#  datasource:
+##    driver-class-name: org.postgresql.Driver
+##    password: mybbs
+##    url: jdbc:postgresql://10.199.97.142:5432/mybbs
+##    username: mybbs
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      # 数据库
+#      url: jdbc:postgresql://10.199.97.142:5432/mybbs
+#      username: mybbs
+#      password: mybbs
+#      driver-class-name: org.postgresql.Driver
+#      # 连接池-初始化大小
+#      initial-size: 10
+#      # 连接池-最大连接数
+#      max-active: 100
+#      # 最大等待时间
+#      max-wait: 60000
+#      # 连接池-最小空闲数
+#      min-idle: 10
+#      # 检测空闲连接
+#      test-while-idle: true
+#      # 最小空闲时间
+#      min-evictable-idle-time-millis: 300000
   flyway:
     url: jdbc:postgresql://10.199.97.142:5432/mybbs
     schemas: public

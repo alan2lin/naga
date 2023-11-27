@@ -1,0 +1,85 @@
+mode: # 不配置默认单机
+  type: Standalone # 运行模式类型。可选配置：Standalone、Cluster
+  repository:
+    type: JDBC # 持久化仓库类型
+# 数据源配置
+dataSources:
+  # 数据源名称，多数据源以逗号分隔
+#  names: db0,db1
+  db0:
+    # 数据库连接池类名称
+    #type: com.alibaba.druid.pool.DruidDataSource
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    # 数据库驱动类名
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://10.199.97.142:5432/mybbs
+    username: mybbs
+    password: mybbs
+  db1:
+    # 数据库连接池类名称
+    #type: com.alibaba.druid.pool.DruidDataSource
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    # 数据库驱动类名
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://10.199.97.142:5432/mybbs
+    username: mybbs
+    password: mybbs
+
+rules:
+  - !SHARDING
+    tables:
+      tshard:
+        actualDataNodes: ds_${0..1}.tshard_${0..1}
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: tshard_inline
+        keyGenerateStrategy:
+          column: id
+          keyGeneratorName: snowflake
+        auditStrategy:
+          auditorNames:
+            - sharding_key_required_auditor
+          allowHintDisable: true
+#    defaultShardingColumn: id
+    #bindingTables:
+    #  - t_shard,t_order_item
+#    defaultDatabaseStrategy:
+#      standard:
+#        shardingColumn: id
+#        shardingAlgorithmName: database_inline
+#    defaultTableStrategy:
+#      none:
+
+    shardingAlgorithms:
+      default_db_inline:
+        type: INLINE
+        props:
+          algorithm-expression: ds_0
+      database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: ds_${id % 2}
+      tshard_inline:
+        type: INLINE
+        props:
+          algorithm-expression: tshard_${id % 2}
+    keyGenerators:
+      snowflake:
+        type: SNOWFLAKE
+    auditors:
+      sharding_key_required_auditor:
+        type: DML_SHARDING_CONDITIONS
+    defaultDatabaseStrategy: # 默认数据库分片策略
+      standard:
+        shardingAlgorithmName: default_db_inline
+    defaultTableStrategy: # 默认表分片策略
+      none:
+# defaultKeyGenerateStrategy: # 默认的分布式序列策略
+# defaultShardingColumn: # 默认分片列名称
+
+  #- !BROADCAST
+  #  tables:
+  #    - t_address
+props:
+  sql-show: true

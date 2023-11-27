@@ -1,0 +1,37 @@
+dataSources:
+  ds0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.alibaba.druid.pool.DruidDataSource
+    jdbcUrl: jdbc:postgresql://10.199.97.142:5432/mybbs
+    username: mybbs
+    password: mybbs
+  ds1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.alibaba.druid.pool.DruidDataSource
+    jdbcUrl: jdbc:postgresql://10.199.97.142:5432/mybbs
+    username: mybbs
+    password: mybbs
+rules:
+  - !SHARDING
+    tables:
+      tshard:
+        actualDataNodes: ds${0..1}.order
+    defaultDatabaseStrategy:
+      standard:
+        shardingColumn: id
+        shardingAlgorithmName: database_inline
+    defaultTableStrategy:
+      standard:
+        shardingColumn: id
+        shardingAlgorithmName: tshard_inline
+    shardingAlgorithms:
+      database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: ds${id % 2}
+      tshard_inline:
+        type: INLINE
+        props:
+          algorithm-expression: tshard_${id % 2}
+props:
+  sql-show: false
