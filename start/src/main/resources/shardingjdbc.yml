@@ -2,34 +2,42 @@ mode: # 不配置默认单机
   type: Standalone # 运行模式类型。可选配置：Standalone、Cluster
   repository:
     type: JDBC # 持久化仓库类型
+
+schemaName: public
 # 数据源配置
 dataSources:
   # 数据源名称，多数据源以逗号分隔
 #  names: db0,db1
-  db0:
+  ds_0:
     # 数据库连接池类名称
     #type: com.alibaba.druid.pool.DruidDataSource
     dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
     # 数据库驱动类名
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://10.199.97.142:5432/mybbs
+    url: jdbc:postgresql://10.199.97.142:5432/mybbs?currentSchema=public
     username: mybbs
     password: mybbs
-  db1:
+    type: com.alibaba.druid.pool.DruidDataSource
+  ds_1:
     # 数据库连接池类名称
     #type: com.alibaba.druid.pool.DruidDataSource
     dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
     # 数据库驱动类名
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://10.199.97.142:5432/mybbs
+    url: jdbc:postgresql://10.199.97.142:5432/mybbs?currentSchema=public
     username: mybbs
     password: mybbs
+    type: com.alibaba.druid.pool.DruidDataSource
 
 rules:
   - !SHARDING
     tables:
       tshard:
         actualDataNodes: ds_${0..1}.tshard_${0..1}
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: database_inline
         tableStrategy:
           standard:
             shardingColumn: id
@@ -44,7 +52,7 @@ rules:
 #    defaultShardingColumn: id
     #bindingTables:
     #  - t_shard,t_order_item
-#    defaultDatabaseStrategy:
+#     defaultDatabaseStrategy:
 #      standard:
 #        shardingColumn: id
 #        shardingAlgorithmName: database_inline
@@ -83,3 +91,4 @@ rules:
   #    - t_address
 props:
   sql-show: true
+#  check-table-metadata-enabled: true
