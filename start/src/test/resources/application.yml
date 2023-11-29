@@ -38,3 +38,6 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapperLocations: classpath*:mybatis/mapper/*mapper.xml
   mapUnderscoreToCamelCase: true
+
+  flyway:
+    locations: classpath:db/migration/test,classpath:db/migration/prod

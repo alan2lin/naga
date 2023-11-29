@@ -1,5 +1,6 @@
-DROP SEQUENCE test_id_seq ;
+DROP SEQUENCE if exists test_id_seq ;
 CREATE SEQUENCE test_id_seq START 3;
+
 CREATE TABLE "public"."test" (
   "id" int8 NOT NULL,
   "name" varchar(255) COLLATE "pg_catalog"."default",

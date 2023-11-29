@@ -1,5 +1,6 @@
 package com.alan2lin.bbs.test;
 
+import com.alan2lin.bbs.test.tc.IndividualContainer1Test;
 import com.alibaba.cola.dto.Response;
 import com.alan2lin.bbs.api.CustomerServiceI;
 import com.alan2lin.bbs.dto.CustomerAddCmd;
@@ -13,7 +14,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.util.TestPropertyValues;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
 
 
 /**
@@ -24,6 +31,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 //@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
+@ContextConfiguration(initializers = {CustomerServiceTest.Initializer.class})
 public class CustomerServiceTest {
 
     @Autowired
@@ -63,5 +71,25 @@ public class CustomerServiceTest {
 
         //3.assert error
         Assertions.assertEquals(ErrorCode.B_CUSTOMER_companyNameConflict.getErrCode(), response.getErrCode());
+    }
+
+    static class Initializer
+            implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
+            TestPropertyValues.of(
+                    "spring.datasource.url=" + pgContainer.getJdbcUrl(),
+                    "spring.datasource.username=" + pgContainer.getUsername(),
+                    "spring.datasource.password=" + pgContainer.getPassword()
+            ).applyTo(configurableApplicationContext.getEnvironment());
+        }
+    }
+    @Container
+    static PostgreSQLContainer<?> pgContainer = new PostgreSQLContainer<>(
+            "postgres:16.1"
+    ).withDatabaseName("individual-tests-db")
+            .withUsername("sa")
+            .withPassword("sa");
+    {
+        pgContainer.start();
     }
 }

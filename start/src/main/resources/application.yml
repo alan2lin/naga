@@ -36,6 +36,7 @@ spring:
     password: "mybbs"
     baselineOnMigrate: true
     baselineVersion: 0
+    locations: classpath:db/migration/prod
 
 # 具体属性参见
 # https://mybatis.org/mybatis-3/zh/configuration.html

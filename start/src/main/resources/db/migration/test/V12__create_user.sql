@@ -1,0 +1,2 @@
+
+CREATE USER mybbs WITH  PASSWORD 'mybbs';
