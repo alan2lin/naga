@@ -17,8 +17,13 @@
         <maven.deploy.skip>true</maven.deploy.skip>
 
         <cola.components.version>4.3.2</cola.components.version>
-
+        <lombok.version>1.18.30</lombok.version>
         <spring-boot.version>3.1.6</spring-boot.version>
+        <mybatis-plus-boot-starter.version>3.5.4.1</mybatis-plus-boot-starter.version>
+        <jakarta.el-api.version>5.0.1</jakarta.el-api.version>
+        <fastjson.version>2.0.42</fastjson.version>
+        <junit-jupiter.version>5.10.1</junit-jupiter.version>
+        <junit-platform-suite-engine.version>1.10.1</junit-platform-suite-engine.version>
         <testcontainers.version>1.19.3</testcontainers.version>
         <flyway.version>10.0.1</flyway.version>
         <shardingsphere.version>5.4.2-SNAPSHOT</shardingsphere.version>
@@ -40,7 +45,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -151,42 +156,38 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.5.4.1</version>
+                <version>${mybatis-plus-boot-starter.version}</version>
             </dependency>
 
-
-            <!--Validation API-->
-            <!--
-                - javax.validation:javax.validation
-                - org.hibernate.validator:hibernate-validator
-                - org.glassfish:jakarta.el
-                are declared in spring-boot-dependencies
-            -->
+            <!-- https://mvnrepository.com/artifact/jakarta.el/jakarta.el-api -->
             <dependency>
-                <groupId>javax.el</groupId>
-                <artifactId>javax.el-api</artifactId>
-                <version>3.0.0</version>
+                <groupId>jakarta.el</groupId>
+                <artifactId>jakarta.el-api</artifactId>
+                <version>${jakarta.el-api.version}</version>
             </dependency>
+
             <!--Validation API End -->
 
             <!-- Misc -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>2.0.42</version>
+                <version>${fastjson.version}</version>
             </dependency>
+
+
             <!-- Misc End -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.10.1</version>
+                <version>${junit-jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-engine -->
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-suite-engine</artifactId>
-                <version>1.10.1</version>
+                <version>${junit-platform-suite-engine.version}</version>
                 <scope>test</scope>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers -->
