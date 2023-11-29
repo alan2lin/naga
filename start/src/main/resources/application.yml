@@ -47,3 +47,10 @@ mybatis-plus:
   mapperLocations: classpath*:mybatis/mapper/*mapper.xml
   mapUnderscoreToCamelCase: true
 
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger/index.html
+

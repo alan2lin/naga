@@ -29,6 +29,9 @@
         <commons-lang3.version>3.14.0</commons-lang3.version>
         <druid.version>1.2.20</druid.version>
         <jakarta.xml.bind-api.version>4.0.1</jakarta.xml.bind-api.version>
+        <swagger-starter.version>2.2.0</swagger-starter.version>
+        <swagger-ui.version>1.7.0</swagger-ui.version>
+
 
         <shardingsphere.version>5.4.2-SNAPSHOT</shardingsphere.version>
 
@@ -284,6 +287,20 @@
                 <artifactId>jakarta.xml.bind-api</artifactId>
                 <version>${jakarta.xml.bind-api.version}</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${swagger-starter.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${swagger-ui.version}</version>
+            </dependency>
+
 
 
         </dependencies>
